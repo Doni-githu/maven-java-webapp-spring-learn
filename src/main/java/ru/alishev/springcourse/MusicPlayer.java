@@ -1,20 +1,23 @@
 package ru.alishev.springcourse;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MusicPlayer {
-    @Autowired
     private List<Music> musicList = new ArrayList<>();
+    @Value("${musicPlayer.name}")
     private String name;
+    @Value("${musicPlayer.volume}")
     private int volume;
 
-    public MusicPlayer(Music music) {
-        this.musicList.add(music);
+    public MusicPlayer(List<Music> musicList) {
+        this.musicList = musicList;
     }
 
     public MusicPlayer() {
@@ -46,7 +49,7 @@ public class MusicPlayer {
 
     @Override
     public String toString() {
-        return "MusicPlayer [musicList=" + musicList + ", name=" + name + ", volume=" + volume + "]";
+        return "MusicPlayer [musicList=" + this.playMusicList() + ", name=" + name + ", volume=" + volume + "]";
     }
 
     @Override
