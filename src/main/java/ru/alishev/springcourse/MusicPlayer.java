@@ -1,28 +1,34 @@
 package ru.alishev.springcourse;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.StringJoiner;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.util.comparator.Comparators;
+
+@Component
 public class MusicPlayer {
+    @Autowired
     private List<Music> musicList = new ArrayList<>();
     private String name;
     private int volume;
 
     public MusicPlayer(Music music) {
-        this.musicList.add(music);   
+        this.musicList.add(music);
     }
 
     public MusicPlayer() {
     }
 
-    public void playMusicList() {
+    public String playMusicList() {
+        List<String> result = new ArrayList<>();
         for (Music music : musicList) {
-            System.out.println("Playing " + music.getSong());
+            result.add(music.getSong());
         }
-    }
-
-    public void setMusic(List<Music> musicList) {
-        this.musicList = musicList;
+        return new JoinerClass(result).toString();
     }
 
     public String getName() {
